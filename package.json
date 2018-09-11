@@ -1,0 +1,28 @@
+{
+  "name": "could-be-class",
+  "version": "0.1.0",
+  "description": "Checks if an object could be an instantiable class.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyurl/could-be-class.git"
+  },
+  "keywords": [
+    "is-class",
+    "instantiable"
+  ],
+  "author": "Ayon Lee <i@hyurl.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyurl/could-be-class/issues"
+  },
+  "homepage": "https://github.com/hyurl/could-be-class#readme",
+  "devDependencies": {
+    "@types/node": "^10.9.4",
+    "tslib": "^1.9.3"
+  }
+}
