@@ -49,10 +49,20 @@ function TsEs5Class() {
 }
 assert.ok(couldBeClass(TsEs5Class));
 
-function NotClass() {
+function notClass() {
     console.log("this is not a class");
 }
-assert.ok(!couldBeClass(NotClass));
+assert.ok(!couldBeClass(notClass));
+
+function IsClass() {
+    console.log("this is a class");
+}
+assert.ok(couldBeClass(IsClass));
+
+function aMethod() {
+    this.desc = "this is a method instead of a class";
+}
+assert.ok(!couldBeClass(aMethod, true)); // strict mode
 
 function* GenFunc() {
     this.desc = "Error will be thrown if trying to instantiate a Generator function.";
@@ -78,4 +88,12 @@ JavaScript could be instantiated as a class constructor, however, in most cases,
 a class written in ES5 style will carry some special fingerprints that the
 detector can test if it could be a class constructor or just a pure function.
 
-**WARN** This module only performs about 95% percent of accuracy.
+**Strict Mode**, you can pass the second argument `strict: boolean` to the 
+function, if it is `true`, when testing ES5 class, will check if its name's 
+first character is upper-cased, which is the common and recommended way to 
+define a class. But when this argument is is `false` (by default), it returns 
+`true` even if there isn't `this` present in the class body when the function 
+name's first character is upper-cased. So setting `strict` is all depends.
+
+**WARN** This module only performs about 98% percent of accuracy when testing 
+ES5 class.

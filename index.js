@@ -1,9 +1,10 @@
 /**
  * Checks if an object could be an instantiable class.
  * @param {any} obj
+ * @param {boolean} strict
  * @returns {boolean}
  */
-function couldBeClass(obj) {
+function couldBeClass(obj, strict) {
     if (typeof obj != "function") return false;
 
     var str = obj.toString();
@@ -17,9 +18,17 @@ function couldBeClass(obj) {
     // has own prototype properties
     if (Object.getOwnPropertyNames(obj.prototype).length >= 2) return true;
     // anonymous function
-    if (str.match(/function\s+\(|function\s+anonymous\(/)) return false;
+    if (/^function\s+\(|^function\s+anonymous\(/.test(str)) return false;
      // has `this` in the body
-    if (str.match(/\b\(this\b|\bthis[\.\[]\b/)) return true;
+    if (/\b\(this\b|\bthis[\.\[]\b/.test(str)) {
+        if (!strict) return true; // could be a method
+        
+        // class should have its name's first character upper-cased.
+        return /^function\s+[A-Z]/.test(str);
+    }
+    // ES5 class without `this` in the body and the name's first character 
+    // upper-cased.
+    if (!strict && /^function\s+[A-Z]/.test(str)) return true;
 
     return false;
 }

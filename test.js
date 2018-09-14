@@ -50,10 +50,20 @@ function TsEs5Class2() {
 }
 assert.ok(couldBeClass(TsEs5Class2));
 
-function NotClass() {
+function notClass() {
     console.log("this is not a class");
 }
-assert.ok(!couldBeClass(NotClass));
+assert.ok(!couldBeClass(notClass));
+
+function IsClass() {
+    console.log("this is a class");
+}
+assert.ok(couldBeClass(IsClass));
+
+function aMethod() {
+    this.desc = "this is a method instead of a class";
+}
+assert.ok(!couldBeClass(aMethod, true)); // strict mode
 
 function* GenFunc() {
     this.desc = "Error will be thrown if trying to instantiate a Generator function.";
