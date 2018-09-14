@@ -57,7 +57,7 @@ assert.ok(!couldBeClass(notClass));
 function IsClass() {
     console.log("this is a class");
 }
-assert.ok(couldBeClass(IsClass));
+assert.ok(couldBeClass(IsClass, true)); // strict mode
 
 function aMethod() {
     this.desc = "this is a method instead of a class";
@@ -91,9 +91,8 @@ detector can test if it could be a class constructor or just a pure function.
 **Strict Mode**, you can pass the second argument `strict: boolean` to the 
 function, if it is `true`, when testing ES5 class, will check if its name's 
 first character is upper-cased, which is the common and recommended way to 
-define a class. But when this argument is is `false` (by default), it returns 
-`true` even if there isn't `this` present in the class body when the function 
-name's first character is upper-cased. So setting `strict` is all depends.
+define a class. It always better to use the `strict` mode and code your classes 
+in the recommended way.
 
 **WARN** This module only performs about 98% percent of accuracy when testing 
 ES5 class.

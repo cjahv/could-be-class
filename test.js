@@ -58,7 +58,7 @@ assert.ok(!couldBeClass(notClass));
 function IsClass() {
     console.log("this is a class");
 }
-assert.ok(couldBeClass(IsClass));
+assert.ok(couldBeClass(IsClass, true)); // strict mode
 
 function aMethod() {
     this.desc = "this is a method instead of a class";

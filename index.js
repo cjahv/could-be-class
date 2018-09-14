@@ -19,16 +19,11 @@ function couldBeClass(obj, strict) {
     if (Object.getOwnPropertyNames(obj.prototype).length >= 2) return true;
     // anonymous function
     if (/^function\s+\(|^function\s+anonymous\(/.test(str)) return false;
-     // has `this` in the body
-    if (/\b\(this\b|\bthis[\.\[]\b/.test(str)) {
-        if (!strict) return true; // could be a method
-        
-        // class should have its name's first character upper-cased.
-        return /^function\s+[A-Z]/.test(str);
-    }
     // ES5 class without `this` in the body and the name's first character 
     // upper-cased.
-    if (!strict && /^function\s+[A-Z]/.test(str)) return true;
+    if (strict && /^function\s+[A-Z]/.test(str)) return true;
+     // has `this` in the body
+    if (!strict && /\b\(this\b|\bthis[\.\[]\b/.test(str)) return true;
 
     return false;
 }
