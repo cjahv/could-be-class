@@ -1,6 +1,6 @@
 {
   "name": "could-be-class",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Checks if an object could be an instantiable class.",
   "main": "index.js",
   "types": "index.d.ts",
